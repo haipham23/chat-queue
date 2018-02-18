@@ -9,7 +9,7 @@ const routes = [{
   method: 'post',
   path: '/api/queue/new-message',
   func: (req, res) =>
-    enqueue(req.body)
+    enqueue(req.body, req.headers)
       .then(() => ResponseFactory.ok(res, 'ok'))
       .catch((error) => ResponseFactory.error(res, error))
 }]

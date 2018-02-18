@@ -5,7 +5,13 @@ const ResponseFactory = {
   error: (res, error) => {
     logger.error(error);
 
-    return res.status(400).json('SERVER_ERROR');
+    if ([
+      'AUTH_ERROR'
+    ].indexOf(error.message) !== -1) {
+      return res.status(400).json(error.message);
+    }
+
+    return res.status(500).json('SERVER_ERROR');
   }
 };
 
