@@ -1,17 +1,18 @@
+const rp = require('chat-rp');
+
 const enqueue = require('../apis/enqueue');
-const ResponseFactory = require('../factories/response.factory');
 
 const routes = [{
   method: 'get',
   path: '/api/health-check',
-  func: (req, res) => ResponseFactory.ok(res, 'ok')
+  func: (req, res) => rp.ok(res, 'ok')
 }, {
   method: 'post',
   path: '/api/queue/new-message',
   func: (req, res) =>
     enqueue(req.body, req.headers)
-      .then(() => ResponseFactory.ok(res, 'ok'))
-      .catch((error) => ResponseFactory.error(res, error))
+      .then(() => rp.ok(res, 'ok'))
+      .catch((error) => rp.error(res, error))
 }]
 
 module.exports = routes;
